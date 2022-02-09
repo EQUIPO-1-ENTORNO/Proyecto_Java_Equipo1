@@ -15,6 +15,12 @@ public class Equipo {
 			char letra = nombreEquipo.charAt(i);
 			if((letra >= 65 && letra<=90)||(letra >= 97 && letra<=122)||letra==32) {
 				//Es un caracter normal si ser alfanumerico y incluye los espacios
+				if (letra >= 97 && letra <= 122) { // letras minusculas
+					//if (i == 0) { // descomentar para cambiar solo la primera letra
+					nombreEquipo = nombreEquipo.substring(0, 1).toUpperCase() + nombreEquipo.substring(1);
+					//}
+					
+				}
 			}
 			else {
 				correcto=false;
