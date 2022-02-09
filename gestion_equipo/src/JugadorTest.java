@@ -4,7 +4,18 @@ import org.junit.jupiter.api.Test;
 
 
 class JugadorTest {
-
+	
+	//Guardar jugador con nombre null
+	@Test
+        void testSetNombreNull() {
+            Jugador jugador = new Jugador();
+            String nombreJugador = null;
+            try {
+                jugador.setNombreJugador(nombreJugador);
+            } catch (NullPointerException e) {
+            }
+            assertNull(jugador.getNombreJugador());
+        }
 
 	//Guardar jugador con nombre vacío
 	@Test
@@ -110,13 +121,15 @@ class JugadorTest {
 
 	//Test comprobar si la edad es un número
 	@Test
-	void testEdadNumeroInvalido() {
-		Jugador jugador = new Jugador();
-		int edad = Integer.parseInt("p");
-		jugador.setEdad(edad);
+        void testEdadNumeroInvalido() {
+            Jugador jugador = new Jugador();
+            try {
+                Integer edad = Integer.parseInt("p");
+                jugador.setEdad(edad);
+            } catch (NumberFormatException e) {}
 
-		assertEquals(-1,jugador.getEdad());
-	}
+            assertEquals(0, jugador.getEdad());
+        }
 
 
 
@@ -174,6 +187,17 @@ class JugadorTest {
 		assertEquals(0, jugador.getEdad());
 	}
 
+	//Test comprobar que el idioma null
+        @Test
+        void testIdiomaNull() {
+            Jugador jugador = new Jugador();
+            String idioma = null;
+            try {
+                jugador.setIdioma(idioma);
+            } catch (NullPointerException e) {}
+            assertNull(jugador.getIdioma());
+        }
+	
 	//Test comprobar que el idioma no se haya seleccionado
 	@Test
 	void testIdiomaNoSelec() {
