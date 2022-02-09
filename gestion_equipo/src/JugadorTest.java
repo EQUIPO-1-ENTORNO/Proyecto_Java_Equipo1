@@ -281,7 +281,17 @@ class JugadorTest {
 		jugador.setNombreJugador("Pepe");
 		assertEquals("Junior",jugador.tipoJugador());
 	}
-	//Test comprobar que devuelve tipo junior si la edad es 25
+	//Test comprobar que devuelve tipo Senior si la edad es menor 25
+	@Test
+	void testTipoEdadMenor25() {
+		Jugador jugador = new Jugador();
+		int edad = 24;
+		jugador.setEdad(edad);
+		jugador.setIdioma("Español");
+		jugador.setNombreJugador("Pepe");
+		assertEquals("Junior",jugador.tipoJugador());
+	}
+	//Test comprobar que devuelve tipo Senior si la edad es 25
 	@Test
 	void testTipoEdadIgual25() {
 		Jugador jugador = new Jugador();
@@ -292,6 +302,18 @@ class JugadorTest {
 
 		//int edad = Integer.parseInt("p");
 		assertEquals("Senior",jugador.tipoJugador());
+	}
+	//Test comprobar que devuelve tipo Master si la edad es 35
+	@Test
+	void testTipoEdadIgual25() {
+		Jugador jugador = new Jugador();
+		int edad = 35;
+		jugador.setEdad(edad);
+		jugador.setIdioma("Español");
+		jugador.setNombreJugador("Pepe");
+
+		//int edad = Integer.parseInt("p");
+		assertEquals("Master",jugador.tipoJugador());
 	}
 	@Test
 	void testTipoEdadMayor35() {
