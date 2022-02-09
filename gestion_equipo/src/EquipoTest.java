@@ -163,4 +163,12 @@ class EquipoTest {
 		assertEquals(ranking, equipo.getRanking());
 	}
 	
+	//Test comprobar que se guarda el nombre en mayusculas (NUEVO)
+	@Test
+	void testNombreMayusculas() {
+		Equipo equipo = new Equipo();
+		equipo.setNombreEquipo("Guadalajara Oeste");
+		assertEquals("GUADALAJARA OESTE",equipo.getNombreEquipo());
+	}
+
 }
