@@ -348,4 +348,12 @@ class JugadorTest {
 		jugador.setNombreJugador("Pepe");
 		assertEquals("Master",jugador.tipoJugador());
 	}
+	
+	//Test comprobar que se guarda el nombre en mayusculas (NUEVO)
+	@Test
+	void testNombreMayusculas() {
+		Jugador jugador = new Jugador();
+		jugador.setNombreJugador("javier");
+		assertEquals("JAVIER",jugador.getNombreJugador());
+	}
 }
