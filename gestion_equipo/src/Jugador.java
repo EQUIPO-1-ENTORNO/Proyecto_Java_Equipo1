@@ -27,26 +27,30 @@ public class Jugador {
 	}
 
 
-	public void setNombreJugador(String nombre) {
-		boolean letrasIngles = true;
+public void setNombreJugador(String nombre) {
+	boolean letrasIngles = true;
 
-		for (int i = 0; i < nombre.length(); i++) {
-			char letra = nombre.charAt(i);
-			if (letra >= 65 && letra <= 90) {
-				//letras mayúsculas
-			} else if (letra >= 97 && letra <= 122) {
-				//letras minúsculas
-			} else if (letra == ' ') {
-				//espacio
-			} else {
-				letrasIngles = false;
-			}
-		}
+	for (int i = 0; i < nombre.length(); i++) {
+		char letra = nombre.charAt(i);
+		if (letra >= 65 && letra <= 90) { // letras mayusculas
 
-		if (letrasIngles && nombre.length() >= 4 && nombre.length() <= 20) {
-			this.nombre = nombre;
+		} else if (letra >= 97 && letra <= 122) { // letras minusculas
+			//if (i == 0) { // descomentar para cambiar solo la primera letra
+			nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
+			//}
+
+		} else if (letra == ' ') {
+
+		} else {
+			letrasIngles = false;
 		}
+	}		
+
+	if (letrasIngles && nombre.length() >= 4 && nombre.length() <= 20) {
+		this.nombre = nombre;
 	}
+
+}
 
 	public void setEdad(int edad) {
 		if (edad >= 18 && edad <= 100) this.edad = edad;
