@@ -1,88 +1,169 @@
 public class Jugador {
-    private String nombre;
-    private int edad;
-    private String idioma;
+	private String nombre;
+	private int edad;
+	private String idioma;
 
-    public Jugador() {
-    }
+	
+	public void setNombreJugador(String nombre) {
+		if (esValido(nombre)){
 
-    public String tipoJugador() {
-        String junior = "Junior";
-        String senior = "Senior";
-        String master = "Master";
+			//Se pasa el nombre a mayúsculas
+			String nombreMayusculas = nombre.toUpperCase();
 
-        if (edad >= 18 && edad < 25) {
-            return junior;
-        } else if (edad >= 25 && edad <= 35) {
-            return senior;
-        } else if (edad > 35) {
-            return master;
-        }
+			//Comprobación del rango
+			if (rangoValido(nombreMayusculas)) {
 
-        return null;
-    }
+				//Comprobación de las letras
+				if (esPalabra(nombreMayusculas)){
+					this.nombre = nombreMayusculas;
+				}
+			}
+		}
+	}
+
+	public String getNombreJugador() {
+		return nombre;
+	}
+
+	
+	public void setEdad(int edad) {
+
+		//Comprobación de la edad
+		if (edadValida(edad)){
+			this.edad = edad;
+		}
+
+	}
+
+	public int getEdad() {
+		return edad;
+	}
 
 
-    public void setNombreJugador(String nombre) {
-        boolean isLetrasIngles = true;
+	public void setIdioma(String idioma) {
+		
 
-        for (int i = 0; i < nombre.length(); i++) {
+		//Se pasa el idomma a minúsculas
+		String idiomaMin = idioma.toLowerCase();
 
-            char letra = nombre.charAt(i);
+		//Se revisa si es válido
+		if (esValido(idiomaMin)) {
+			if (idiomaValido(idiomaMin)) {
+				this.idioma = idioma;
+			}
 
-            if (letra >= 65 && letra <= 90) {
-                // letras mayusculas
-            } else if (letra >= 97 && letra <= 122) {
-                // letras minusculas
-                //if (i == 0) { // descomentar para cambiar solo la primera letra
-                nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
-                //}
-            } else if (letra == ' ') {
+		}
+	}
 
-            } else {
-                isLetrasIngles = false;
-            }
-        }
+	public String getIdioma() {
+		return idioma;
+	}
 
-        if (isLetrasIngles && nombre.length() >= 4 && nombre.length() <= 20) {
-            this.nombre = nombre;
-        }
 
-    }
+	
+	public String getTipoJugador() {
+		
+		String junior = "Junior";
+		String senior = "Senior";
+		String master = "Master";
 
-    public void setEdad(int edad) {
-        if (edad >= 18 && edad <= 100) {
-            this.edad = edad;
-        } else if (edad == -1) {
-            this.edad = -1;
-        }
-    }
+		//Variables para los rangos de edades
+		int edadMinimaJunior = 18;
+		int edadMaximaJunior = 25;
+		int edadMinimaSenior = 26;
+		int edadMaximaSenior = 35;
+		int edadMinimaMaster = 36;
+		int edadCero = 0;
 
-    public void setIdioma(String idioma) {
-        switch (idioma) {
-            case "inglés":
-            case "español":
-            case "alemán":
-            case "francés":
-                //En caso de que sea alguno de los anteriores, se asigna el idioma,
-                this.idioma = idioma;
-                break;
+			if (getEdad() >= edadMinimaJunior
+					&& getEdad() <= edadMaximaJunior) {
 
-            default:
-                //No se asigna idioma.
-                break;
-        }
-    }
+				return junior;
 
-    public String getIdioma() {
-        return idioma;
-    }
+			} else if (getEdad() >= edadMinimaSenior
+					&& getEdad() <= edadMaximaSenior) {
 
-    public String getNombreJugador() {
-        return nombre;
-    }
+				return senior;
 
-    public int getEdad() {
-        return edad;
-    }
+			} else if (getEdad() >= edadMinimaMaster) {
+
+				return master;
+
+			} else {
+				return null;
+			}
+
+	}
+
+	//Comprobamos con un boolean si es nulo
+	private Boolean esValido(String comprobar) {
+
+		if (comprobar != null) {
+
+			return true;
+		}
+		return false;
+	}
+
+	//Devuelve true si el rando de la palabra es adecuado
+	private boolean rangoValido(String comprobar){
+		int largoMinimo = 4;
+		int largoMaximo = 20;
+
+		if (comprobar.length() >= largoMinimo
+				&& comprobar.length() <= largoMaximo ){
+			return true;
+		}
+		return false;
+	}
+
+	//Devuelve true si las letras corresponden al abecedario español
+	private boolean esPalabra(String comprobar){
+		char a = 65;
+		char z = 90;
+		char espacio = 32;
+
+		for (int i = 0; i < comprobar.length(); i++) {
+			char c = comprobar.charAt(i);
+			if (!(c >= a && c <= z || c==espacio)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	//Devuelve true si el rango de edad es correcto
+	private boolean edadValida(int comprobarEdad){
+		int edadCero = 0;
+		int edadMinima = 18;
+		int edadMaxima = 100;
+
+		if (comprobarEdad != edadCero){
+
+			if (comprobarEdad >= edadMinima && comprobarEdad <= edadMaxima){
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	//Devuelve true si el idioma es válido
+	private boolean idiomaValido(String idioma){
+		String[] listaIdiomas =  {"aleman", "ingles", "espanol", "frances"};
+		String vacio = " ";
+
+		if (!idioma.equals(vacio)){
+			for (int i = 0; i < listaIdiomas.length; i++) {
+				if (idioma.contains(listaIdiomas[i])){
+					return true;
+				}
+			}
+
+		}
+		return false;
+	}
+
 }
